@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
+        <link rel="stylesheet" href="css/add-image.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
@@ -13,7 +14,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6 mt-5">
     <form action="php/register.php" method="POST">
-        <h2 class="text-center">Register</h2>
+        <h2 class="text-center display-4 ">Register</h2>
              <div class="form-group">
                 <label for="firstname">First Name</label>
                 <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name">
@@ -34,7 +35,7 @@
                 <label for="confirm_password">Confirm Password</label>
                 <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
             </div>
-        <input type="submit" value="REGISTER" class="btn btn-primary btn-block">
+        <input type="submit" value="REGISTER" class="file-upload-btn    ">
     </form>
                         </div>
                   </div>

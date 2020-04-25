@@ -16,6 +16,7 @@ $query=new MongoDB\Driver\Query($filter);
     $user=$row[0]->username;
     echo $user;
     $_SESSION['username']=$user;
+    $_SESSION['password']=$pass;
     header("Location:../index.php");
     } catch (MongoDB\Driver\Exception\Exception $e){
         die("Error Encountered:.$e");

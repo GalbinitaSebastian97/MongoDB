@@ -1,5 +1,7 @@
 <!doctype html>
-<?php session_start();?>
+<?php session_start();
+ require_once 'connection/db_inc_article.php';
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,10 +10,10 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title></title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
-    <link rel="stylesheet" href="css/custom-style.css">
+    <link rel="stylesheet" href="css/add-image.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
 
@@ -35,22 +37,34 @@
 
       <div class="container">
         <!-- Example row of columns -->
-        <div class="row">
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-          </div>
+<div class="row">
+          <?php
+try{
+ include 'connection/db_inc_article.php';
+$query=new MongoDb\Driver\Query([]);
+
+$rows=$manager->executeQuery($dbname, $query);
+
+foreach($rows as $row){
+    echo 
+         "<div class='col-md-4'>".
+            "<h2>".$row->articlename."</h2>".
+            "<p>".$row->articletext."</p>".
+            "<td><img src=".$row->imagine." width='300' height='100'></td>".
+            "<br></br>".
+            "<td><a class='file-upload-btn' href='viewarticle.php?id=".$row->_id.
+            "&articlename=".$row->articlename.
+            "&articletext=".$row->articletext.
+            "&imagine=".$row->imagine.
+            "<br></br>".
+            "<p><a class='file-upload-btn' href='articleposted.php'>View details &raquo;</a></p>".
+          "</div>";
+}
+}catch(MongoDB\Driver\Exception\Exception $e){
+    die("Error Encountered: ".$e);
+}
+
+?>
         </div>
 
         <hr>

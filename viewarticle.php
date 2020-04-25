@@ -11,37 +11,12 @@
 <?php include'connection/header.php'?>
             <div class="container mt-5 pt-5">
                 <div class="row">
-                <h2 class="text-center display-4 ">User List</h2>
+                <h2 class="text-center display-4 ">View article</h2>
 <?php
 try{
-    include 'connection/db_inc_user.php';
+    include 'connection/db_inc_article.php';
 $query=new MongoDb\Driver\Query([]);
 
-$rows=$manager->executeQuery($dbname, $query);
-
-echo"<table class='table'>
-    <thead>
-         <th>First Name</th>
-         <th>Last Name</th>
-         <th>Username</th>
-         <th>Action</th>
-    </thead>";
-
-foreach($rows as $row){
-    echo "<tr>".
-            "<td>".$row->firstname  ."</td>".
-            "<td>".$row->lastname  ."</td>".
-            "<td>".$row->username  ."</td>".
-            "<td><a class='btn btn-info' href='edituser.php?id=".$row->_id.
-            "&firstname=".$row->firstname.
-            "&lastname=".$row->lastname.
-            "&username=".$row->username.
-            "&password=".$row->password.
-            "'>Edit</a> ".
-            "<a class='btn btn-danger'href='php/delete.php?id=".$row->_id."'>Delete</a></td>".
-         "</tr>";
-}
-echo "</table>";
 }catch(MongoDB\Driver\Exception\Exception $e){
     die("Error Encountered: ".$e);
 }
