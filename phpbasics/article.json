@@ -1,0 +1,2 @@
+{ "_id" : { "$oid" : "5ea42ee80c700000980058e8" }, "articlename" : "First Article", "articletext" : "First Article", "imagine" : "./images/d0a29715effe92385f27c4c4133200d3background.jpg" }
+{ "_id" : { "$oid" : "5ea42fda0c700000980058e9" }, "articlename" : "My second Article", "articletext" : "My second article", "imagine" : "./images/26d73ee8aec1373b5566902293b8ebddfood.jpg" }
