@@ -7,33 +7,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
+        <link rel="stylesheet" href="css/add-image.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
-        <div class="container">
+         <?php include'connection/header.php';?>
+        <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6 mt-5">
     <form action="php/update.php" method="POST">
-        <h2 class="text-center">Edit User </h2>
-        <a href="userlist.php" class="btn btn-success btn-block">Go to User List</a>
+        <h2 class="text-center display-4">Edit User </h2>
             <input type="hidden" name="id" value="<?php echo $_GET["id"];?>">
              <div class="form-group">
                 <label for="firstname">First Name</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name"values="<?php echo $_GET["firstname"];?>">
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name"required values="<?php echo $_GET["firstname"];?>">
              </div>
              <div class="form-group">
                 <label for="lastname">Last Name</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name" values="<?php echo $_GET["lastname"];?>">
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name" required values="<?php echo $_GET["lastname"];?>">
             </div>
              <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" values="<?php echo $_GET["username"];?>">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required values="<?php echo $_GET["username"];?>">
             </div>
              <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password"values="<?php echo $_GET["password"];?>">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password"required values="<?php echo $_GET["password"];?>">
             </div>
-        <input type="submit" value="UPDATE" class="btn btn-primary btn-block">
+        <input type="submit" value="UPDATE" class="file-upload-btn">
     </form>
                         </div>
                   </div>
