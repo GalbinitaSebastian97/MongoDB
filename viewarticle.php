@@ -10,19 +10,23 @@
         <body>
 <?php include'connection/header.php'?>
             <div class="container mt-5 pt-5">
-                <div class="row">
-                <h2 class="text-center display-4 ">View article</h2>
-<?php
-try{
-    include 'connection/db_inc_article.php';
-$query=new MongoDb\Driver\Query([]);
-
-}catch(MongoDB\Driver\Exception\Exception $e){
-    die("Error Encountered: ".$e);
-}
-
-?>
+                <div class="text-center">
+                <h2 class="text-center display-4 "><?php
+                echo $_GET['articlename'];
+                ?></h2>               
                 </div>
+                <?php
+                 include 'connection/db_inc_article.php';
+                 $query=new MongoDb\Driver\Query([]);
+                 $rows=$manager->executeQuery($dbname, $query);
+                 $imagine=$_GET['imagine'];
+                 foreach($rows as $row){
+                  if($_GET['id']==$row->_id){
+                      echo "<br><img src=".$row->imagine." width='1100' height='600'>";
+                  }
+                 }
+                ?>
+                <h4 style="padding-left: 50px;"><br><?php echo $_GET['articletext'];?><h4>
             </div>
        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

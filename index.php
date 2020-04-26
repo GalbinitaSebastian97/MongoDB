@@ -37,6 +37,7 @@
 
       <div class="container">
         <!-- Example row of columns -->
+        
 <div class="row">
           <?php
 try{
