@@ -1,3 +1,35 @@
+<?php
+require_once 'connection/db_inc_article.php';
+$bulk = new MongoDB\Driver\BulkWrite;
+
+if(!isset($_POST["submit"])){
+$id = new \MongoDB\BSON\ObjectId($_GET['id']);
+$filter = ['_id' => $id];
+$query = new MongoDB\Driver\Query($filter);          
+$article = $manager->executeQuery("phpbasics.article", $query);
+$doc = current($article->toArray());
+}else{
+    $target="./images/".md5(uniqid(time())).basename($_FILES['imagine']['name']);
+ $data=[
+        'articlename'=>$_POST['articlename'],
+        'articletext'=>$_POST['articletext'],
+        'imagine'=>$target,
+    ];
+$id = new \MongoDB\BSON\ObjectId($_POST['id']);
+$filter = ['_id' => $id];
+    
+$update=['$set'=>$data];
+
+ $bulk->update($filter, $update);
+ $manager->executeBulkWrite('phpbasics.article',$bulk);
+ if(move_uploaded_file($_FILES['imagine']['tmp_name'],$target)){
+       header('location:index.php');
+    }else{
+        $msg="Vai! Vai! Vai!!!";
+    }
+header('location:index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -13,20 +45,21 @@
 <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-7 mt-5">
-                    <form action="addarticle_1.php" method="POST" enctype="multipart/form-data">
-                      <h2 class="text-center display-4"></h2>
+                    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" enctype="multipart/form-data">
+                      <h2 class="text-center display-4">Edit Article</h2>
                             <div class="form-group">
                               <label for="articlename">Article Name</label>
-                              <input type="text" class="form-control" id="articlename" name="articlename" placeholder="Enter the Title for Your Article">
+                              <input type="text" class="form-control" id="articlename" name="articlename" placeholder="Enter the Title for Your Article" values="<?php echo $_GET["articlename"];?>">
                             </div>
+                            <input type="hidden" name="id" value="<?php echo $_GET["id"];?>">
                             <div class="form-group">
                               <label for="articletext">Add an Overview</label>
-                              <textarea class="form-control" name="articletext" rows="3" required></textarea>
+                              <textarea class="form-control" name="articletext" rows="3" required values="<?php echo $_GET["articletext"];?>"></textarea>
                             </div>    
                             <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
                             <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
                             <div class="image-upload-wrap">
-                              <input class="file-upload-input" type='file' onchange="readURL(this);" name="imagine">
+                              <input class="file-upload-input" type='file' onchange="readURL(this);" name="imagine" values="<?php echo $_GET["imagine"];?>">
                               <div class="drag-text">
                                 <h3>Drag and drop an Image</h3>
                               </div>
@@ -38,7 +71,7 @@
                               </div>
                             </div>
                             <br>
-                                  <input type="submit" value="ADD ARTICLE" name="uploadarticle" class="file-upload-btn">
+                                  <input type="submit" value="ADD ARTICLE" name="submit" class="file-upload-btn">
                     </form>
                 </div>
             </div>

@@ -38,7 +38,7 @@
                               </div>
                             </div>
                             <br>
-                                  <input type="submit" value="ADD ARTICLE" name="uploadarticle" class="file-upload-btn">
+                         <input type="submit" value="ADD ARTICLE" name="uploadarticle" class="file-upload-btn">
                     </form>
                 </div>
             </div>

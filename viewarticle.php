@@ -25,6 +25,12 @@
                       echo "<br><img src=".$row->imagine." width='1100' height='600'>";
                   }
                  }
+                echo  "<td><a class='btn btn-info' href='editarticle.php?id=".$row->_id.
+                        "&articlename=".$row->articlename.
+                        "&articletext=".$row->articletext.
+                        "&imagine=".$row->imagine.
+                        "'>Edit</a> ".
+                        "<a class='btn btn-danger'href='php/delete.php?id=".$row->_id."'>Delete</a></td>";
                 ?>
                 <h4 style="padding-left: 50px;"><br><?php echo $_GET['articletext'];?><h4>
             </div>
